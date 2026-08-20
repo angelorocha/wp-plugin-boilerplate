@@ -1,0 +1,22 @@
+includes:
+    - vendor/szepeviktor/phpstan-wordpress/extension.neon
+
+parameters:
+    level: 5
+    paths:
+	    - admin/classes/
+	    - admin/templates/
+	    - public/classes/
+	    - public/templates/
+    bootstrapFiles:
+        - plugin-name.php
+        - autoload.php
+    excludePaths:
+        analyseAndScan:
+            - vendor (?)
+            - tests (?)
+            - node_modules (?)
+    ignoreErrors:
+        # Sample: Ignore warnings if necessary
+        # - '#Unreachable statement - code above always terminates.#'
+        - '#Action callback returns .* but should not return anything\.#'

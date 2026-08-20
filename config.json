@@ -1,0 +1,15 @@
+{
+	"tasksPath": "./tasks",
+	"publicStylesOrigin": "./public/assets/src/sass",
+	"publicStyleDestination": "./public/assets/css",
+	"adminStylesOrigin": "./admin/assets/src/sass",
+	"adminStyleDestination": "./admin/assets/css",
+	"publicJSOrigin": "./public/assets/src/js",
+	"publicJSDestination": "./public/assets/js",
+	"adminJSOrigin": "./admin/assets/src/js",
+	"adminJSDestination": "./admin/assets/js",
+	"imageSrcFolder": "./public/assets/src/images",
+	"imageDestFolder": "./public/assets/images",
+	"adminImageSrcFolder": "./admin/assets/src/images",
+	"adminImageDestFolder": "./admin/assets/images"
+}

@@ -1,0 +1,57 @@
+{
+	"name": "boilerplate/plugin-boilerplate",
+	"description": "Boilerplate plugin for WordPress",
+	"type": "wordpress-plugin",
+	"keywords": [
+		"wordpress",
+		"plugin"
+	],
+	"license": "GNU General Public License v3 or later",
+	"autoload": {
+		"psr-4": {
+			"BoilerplatePluginName\\Admin\\": "admin/classes/",
+			"BoilerplatePluginName\\Front\\": "public/classes/"
+		}
+	},
+	"require-dev": {
+		"brain/monkey": "^2.6",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+		"mockery/mockery": "^1.6",
+		"pestphp/pest": "^2.0",
+		"phpstan/phpstan": "^2.0",
+		"szepeviktor/phpstan-wordpress": "^2.0",
+		"wp-coding-standards/wpcs": "^3.0"
+	},
+	"scripts": {
+		"test": "pest",
+		"test:coverage": "pest --coverage",
+		"phpcs": "phpcs --standard=phpcs.xml.dist",
+		"phpcbf": "phpcbf --standard=phpcs.xml.dist",
+		"phpstan": "phpstan analyse --memory-limit=1G",
+		"build": "@php .build/build.php build",
+		"startplugin": "@php .build/build.php startplugin",
+		"check": [
+			"@phpcbf --standard=phpcs.xml.dist",
+			"@phpcs --standard=phpcs.xml.dist",
+			"@phpstan"
+		]
+	},
+	"config": {
+		"allow-plugins": {
+			"pestphp/pest-plugin": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"optimize-autoloader": true,
+		"sort-packages": true,
+		"process-timeout": 0
+	},
+	"authors": [
+		{
+			"name": "Angelo Rocha",
+			"email": "contato@angelorocha.com.br"
+		}
+	],
+	"require": {
+		"php": ">8.0"
+	}
+}
