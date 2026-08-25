@@ -18,7 +18,7 @@ if ( ! function_exists( 'add_action' ) ) {
  *
  * @since 1.0.0
  */
-class PluginInit {
+final class PluginInit {
 	/**
 	 * Instance of this class.
 	 *
@@ -124,7 +124,7 @@ class PluginInit {
 	 * @see ajaxCheckReferer() to validate ajax calls
 	 * @since 1.0.0
 	 */
-	public function __construct() {
+	protected function __construct() {
 
 		if ( empty( self::$global_params ) ) {
 			self::$global_params = [
@@ -187,7 +187,7 @@ class PluginInit {
 				exit;
 			}
 		}
-		
+
 		check_ajax_referer( self::$nonce, 'nonce' );
 	}
 
@@ -208,10 +208,10 @@ class PluginInit {
 	 * @since 1.0.0
 	 */
 	public function loadAdminStylesAndScripts(): void {
-		if ( self::assetExist( 'main.css', false, true ) ) {
+		if ( $this->assetExist( 'main.css', false, true ) ) {
 			wp_enqueue_style( self::$prefix . self::$admin_css_file, self::$plugin_url . 'admin/assets/css/main.css', [], self::$file_version );
 		}
-		if ( self::assetExist( 'main.js', true, true ) ) {
+		if ( $this->assetExist( 'main.js', true, true ) ) {
 			wp_enqueue_script( self::$prefix . self::$admin_js_file, self::$plugin_url . 'admin/assets/js/main.js', [ 'jquery' ], self::$file_version, true );
 			wp_localize_script( self::$prefix . self::$admin_js_file, self::$global_params_object_name, self::$global_params );
 		}
@@ -224,10 +224,10 @@ class PluginInit {
 	 * @since 1.0.0
 	 */
 	public function loadPublicStylesAndScripts(): void {
-		if ( self::assetExist( 'main.css', false, false ) ) {
+		if ( $this->assetExist( 'main.css', false, false ) ) {
 			wp_enqueue_style( self::$prefix . self::$public_css_file, self::$plugin_url . 'public/assets/css/main.css', [], self::$file_version );
 		}
-		if ( self::assetExist( 'main.js', true, false ) ) {
+		if ( $this->assetExist( 'main.js', true, false ) ) {
 			wp_enqueue_script( self::$prefix . self::$public_js_file, self::$plugin_url . 'public/assets/js/main.js', [ 'jquery' ], self::$file_version, true );
 			wp_localize_script( self::$prefix . self::$public_js_file, self::$global_params_object_name, self::$global_params );
 		}
