@@ -4,7 +4,12 @@ const gulp = require('gulp');
 const gulpLoadPlugins = require('gulp-load-plugins');
 const plugins = gulpLoadPlugins();
 const config = require('./config.json');
-const sass = require('gulp-sass')(require('sass'));
+const gulpSass = require('gulp-sass');
+const sassCompiler = require('sass-embedded');
+const sass = gulpSass(sassCompiler);
+
+// Version Task
+require(`${config.tasksPath}/sync-version`)(gulp, plugins, config);
 
 // Sass Task
 require(`${config.tasksPath}/sass-compile`)(gulp, plugins, config, sass);
@@ -18,8 +23,8 @@ require(`${config.tasksPath}/js-compile-admin`)(gulp, plugins, config);
 require(`${config.tasksPath}/imagemin`)(gulp, plugins, config);
 require(`${config.tasksPath}/imagemin-admin`)(gulp, plugins, config);
 
-//Watch Task
-exports.watch = function () {
+// Watch Task
+exports.watch = gulp.series('sync-version', function watchFiles() {
 	gulp.watch(`${config.publicStylesOrigin}/**/*.scss`, gulp.series('sass-compile'));
 	gulp.watch(`${config.adminStylesOrigin}/**/*.scss`, gulp.series('sass-compile-admin'));
 
@@ -28,7 +33,10 @@ exports.watch = function () {
 
 	gulp.watch(`${config.imageSrcFolder}/**/*.*`, gulp.series('imagemin'));
 	gulp.watch(`${config.adminImageSrcFolder}/**/*.*`, gulp.series('imagemin-admin'));
-}
+});
 
-// Default Task
-exports.default = gulp.series('imagemin', 'imagemin-admin', 'js-compile', 'js-compile-admin', 'sass-compile', 'sass-compile-admin');
+// Default / Build Task
+exports.default = gulp.series(
+	'sync-version',
+	gulp.parallel('imagemin', 'imagemin-admin', 'js-compile', 'js-compile-admin', 'sass-compile', 'sass-compile-admin')
+);
