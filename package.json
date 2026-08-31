@@ -15,7 +15,17 @@
     "WordPress",
     "plugin"
   ],
-  "author": "Angelo Rocha",
+  "homepage": "",
+  "license": "GPL-3.0-or-later",
+  "author": {
+    "name": "",
+    "email": "",
+    "url": ""
+  },
+  "funding": {
+    "type": "",
+    "url": ""
+  },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",

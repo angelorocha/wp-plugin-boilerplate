@@ -3,7 +3,7 @@ module.exports = function (gulp, plugins, config, sass) {
 		return gulp.src(config.adminStylesOrigin + '/**/*.scss')
 			.pipe(plugins.sourcemaps.init())
 			.pipe(sass())
-			.pipe(plugins.concat('main.css'))
+			.pipe(plugins.concat('admin.min.css'))
 			.pipe(plugins.cleanCss({compatibility: 'ie8'}))
 			.pipe(plugins.sourcemaps.write('./', {addComment: true})) // write sourcemaps
 			.pipe(gulp.dest(config.adminStyleDestination))

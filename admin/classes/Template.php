@@ -35,7 +35,7 @@ final class Template {
 		if ( $is_admin ) {
 			$path = 'admin';
 		}
-		$file_path = PluginInit::getPluginDirPath() . "$path/templates/" . $template['template'];
+		$file_path = PluginInit::get_plugin_path() . "$path/templates/" . $template['template'];
 		$output    = __( 'Template not found', 'plugin-name' );
 		if ( file_exists( $file_path ) ) {
 			ob_start();
@@ -43,7 +43,7 @@ final class Template {
 			$output = ob_get_clean();
 		}
 
-		echo wp_kses( $output, self::sanitizeOutput() );
+		echo wp_kses( $output, self::sanitize_output() );
 	}
 
 	/**
@@ -52,7 +52,7 @@ final class Template {
 	 * @return array
 	 * @since 1.0.0
 	 */
-	public static function sanitizeOutput(): array {
+	public static function sanitize_output(): array {
 		$allowed_tags = [
 			'div'      => [
 				'class'        => [],
@@ -210,6 +210,6 @@ final class Template {
 			],
 		];
 
-		return apply_filters( 'plugin_name_sanitize_output', $allowed_tags );
+		return apply_filters( 'boilerplate_sanitize_output', $allowed_tags );
 	}
 }

@@ -3,11 +3,12 @@ includes:
 
 parameters:
     level: 5
+    reportUnmatchedIgnoredErrors: false
     paths:
-	    - admin/classes/
-	    - admin/templates/
-	    - public/classes/
-	    - public/templates/
+        - admin/classes/
+        - admin/templates/
+        - public/classes/
+        - public/templates/
     bootstrapFiles:
         - plugin-name.php
         - autoload.php

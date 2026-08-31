@@ -31,7 +31,7 @@ if ( ! function_exists( 'boilerplate_autoload' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/class-wp-filesystem-direct.php';
 		}
 		$content    = new WP_Filesystem_Direct( false );
-		$composer   = $content->get_contents( PLUGIN_BOILERPLATE_DIR_PATH . 'composer.json' );
+		$composer   = $content->get_contents( BOILERPLATE_DIR_PATH . 'composer.json' );
 		$composer   = json_decode( $composer, true );
 		$namespaces = $composer['autoload']['psr-4'] ?? [];
 		foreach ( $namespaces as $namespace => $classpaths ) {

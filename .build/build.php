@@ -76,6 +76,7 @@ if ( 'startplugin' === $action ) {
 		. './wp-cli.phar plugin install plugin-check --activate --allow-root"';
 
 	system( $wp_cli_cmd );
+	system( 'docker exec ' . $current_plugin_name . '_wp_test chown -R www-data:www-data /var/www/html' );
 
 	$admin_url = 'http://localhost:8181/wp-admin';
 
