@@ -293,9 +293,9 @@ final class PluginInit {
 	 * @since 1.0.0
 	 */
 	public function flush_rewrite_rules(): void {
-		if ( is_admin() && get_option( 'saibba_flush_rewrite' ) ) {
+		if ( is_admin() && get_option( 'boilerplate_flush_rewrite' ) ) {
 			flush_rewrite_rules();
-			delete_option( 'saibba_flush_rewrite' );
+			delete_option( 'boilerplate_flush_rewrite' );
 		}
 	}
 
@@ -306,8 +306,8 @@ final class PluginInit {
 	 * @since 1.0.0
 	 */
 	public static function plugin_activate_action(): void {
-		if ( ! get_option( 'saibba_flush_rewrite' ) ) {
-			add_option( 'saibba_flush_rewrite', true );
+		if ( ! get_option( 'boilerplate_flush_rewrite' ) ) {
+			add_option( 'boilerplate_flush_rewrite', true );
 		}
 		if ( ! get_option( 'boilerplate_plugin_version' ) ) {
 			add_option( 'boilerplate_plugin_version', self::get_plugin_version() );
