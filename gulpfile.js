@@ -24,16 +24,48 @@ require(`${config.tasksPath}/imagemin`)(gulp, plugins, config);
 require(`${config.tasksPath}/imagemin-admin`)(gulp, plugins, config);
 
 // Watch Task
-exports.watch = gulp.series('sync-version', function watchFiles() {
-	gulp.watch(`${config.publicStylesOrigin}/**/*.scss`, gulp.series('sass-compile'));
-	gulp.watch(`${config.adminStylesOrigin}/**/*.scss`, gulp.series('sass-compile-admin'));
+exports.watch = gulp.series(
+	"sync-version",
+	gulp.parallel(
+		"sass-compile",
+		"sass-compile-admin",
+		"js-compile",
+		"js-compile-admin"
+	),
+	function watchFiles() {
+		gulp.watch(
+			[
+				`${config.publicStylesOrigin}/**/*.scss`,
+			],
+			gulp.series("sass-compile")
+		);
 
-	gulp.watch(`${config.publicJSOrigin}/**/*.js`, gulp.series('js-compile'));
-	gulp.watch(`${config.adminJSOrigin}/**/*.js`, gulp.series('js-compile-admin'));
+		gulp.watch(
+			`${config.adminStylesOrigin}/**/*.scss`,
+			gulp.series("sass-compile-admin")
+		);
 
-	gulp.watch(`${config.imageSrcFolder}/**/*.*`, gulp.series('imagemin'));
-	gulp.watch(`${config.adminImageSrcFolder}/**/*.*`, gulp.series('imagemin-admin'));
-});
+		gulp.watch(
+			`${config.publicJSOrigin}/**/*.js`,
+			gulp.series("js-compile")
+		);
+
+		gulp.watch(
+			`${config.adminJSOrigin}/**/*.js`,
+			gulp.series("js-compile-admin")
+		);
+
+		gulp.watch(
+			`${config.imageSrcFolder}/**/*.*`,
+			gulp.series("imagemin")
+		);
+
+		gulp.watch(
+			`${config.adminImageSrcFolder}/**/*.*`,
+			gulp.series("imagemin-admin")
+		);
+	}
+);
 
 // Default / Build Task
 exports.default = gulp.series(
